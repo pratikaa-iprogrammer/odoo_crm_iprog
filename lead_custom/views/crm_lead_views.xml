@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_pratik" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_company_ids']" position="after">
+                <field name='import_date'/>
+                <field name='project_type'/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="before">
+                <field name='recieved_by'/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name='lead_type'/>
+                <field name='lead_source'/>
+                <field name='partners' invisible="recieved_by != 'recieved1'" />
+                <field name='consultants' invisible="recieved_by != 'recieved2'" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_oppor_inherit_pratik" model="ir.ui.view">
+        <field name="name">crm.lead.list.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name='import_date'/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name='column_invisible'>True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name='column_invisible'>True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name='string'>Lead Name</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expected_revenue']" position="after">
+                <field name='country_id'/>
+                <field name='lead_source'/>
+                <field name='user_id' string="Owner" widget="many2one_avatar_user"/>
+            </xpath>
+            <xpath expr="//field[@name='expected_revenue']" position="before">
+                <field name='stage_id'/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
